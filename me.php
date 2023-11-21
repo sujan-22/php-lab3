@@ -1,3 +1,3 @@
 <?php 
-    echo "Sujan Rokad, 000882948";
+    echo "<strong>Sujan Rokad - 000882948</strong>";
 ?>
