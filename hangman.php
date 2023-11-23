@@ -5,19 +5,10 @@
 // have note made my work available to anyone else.
 
 /** 
- * Hangman Game
- *
- * This script implements a simple Hangman game with session management and AJAX communication.
- * 
  * @author Sujan Rokad
  * @version 202335.00
  * @package COMP 10260 Assignment 3
 */
-
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 
 // Start the session
 session_start();
@@ -87,7 +78,7 @@ function makeGuess($letter) {
 
         // Check if the user has lost
         if ($_SESSION['strikes'] >= 7) {
-            $_SESSION['status'] = "Sorry, you have lost. The word was " . implode('', $_SESSION['secret']) . ".";
+            $_SESSION['status'] = "Sorry, you have lost";
         }
     } else {
         $_SESSION['status'] = "You already guessed that letter. Try another one.";
@@ -111,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 $response = [
     'guesses' => implode(', ', $_SESSION['guesses']),
     'alphabet' => implode(', ', $_SESSION['alphabet']),
-    'secret' => implode(' ', array_map(function ($letter) {
+    'secret' => $_SESSION['strikes'] >= 7 ? implode('', $_SESSION['secret']) : implode(' ', array_map(function ($letter) {
         return in_array($letter, $_SESSION['guesses']) ? $letter : '_';
     }, $_SESSION['secret'])),
     'strikes' => $_SESSION['strikes'],
