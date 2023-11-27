@@ -49,7 +49,7 @@ function makeGuess($letter) {
     $letter = strtoupper($letter);
 
     // Check if the game has already ended
-    if ($_SESSION['status'] === "Congratulations! You won!" || $_SESSION['status'] === "Sorry, you lost. The word was " . implode('', $_SESSION['secret']) . ".") {
+    if ($_SESSION['status'] === "Congratulations! You won!" || $_SESSION['status'] === "Sorry, you have lost.") {
         return;
     }
 
@@ -76,10 +76,11 @@ function makeGuess($letter) {
             $_SESSION['status'] = "Congratulations! You won!";
         }
 
-        // Check if the user has lost
-        if ($_SESSION['strikes'] >= 7) {
-            $_SESSION['status'] = "Sorry, you have lost";
+         // Check if the user has lost
+         if ($_SESSION['strikes'] >= 7) {
+            $_SESSION['status'] = "Sorry, you have lost.";
         }
+
     } else {
         $_SESSION['status'] = "You already guessed that letter. Try another one.";
     }
